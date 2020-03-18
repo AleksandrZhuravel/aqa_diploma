@@ -22,7 +22,8 @@ public class SQLHelper {
 
     public void dbPayment(DataHelper.BankAnswer bankAnswer, DataHelper.OrderAmount orderAmountNumber) throws SQLException {
         try (
-                val conn = DriverManager.getConnection("jdbc:postgresql://192.168.99.100:5432/postgres", "postgres", "postgres");
+                // val conn = DriverManager.getConnection("jdbc:postgresql://192.168.99.100:5432/postgres", "postgres", "postgres");
+                val conn = DriverManager.getConnection("jdbc:mysql://192.168.99.100:3306/app", "app", "pass");
         ) {
             val paymentStatusVal = runner.query(conn, paymentStatus, new ScalarHandler<>());
             val paymentIdVal = runner.query(conn, paymentId, new ScalarHandler<>());
@@ -38,7 +39,8 @@ public class SQLHelper {
 
     public void dbCredit(DataHelper.BankAnswer bankAnswer) throws SQLException {
         try (
-                val conn = DriverManager.getConnection("jdbc:postgresql://192.168.99.100:5432/postgres", "postgres", "postgres");
+                // val conn = DriverManager.getConnection("jdbc:postgresql://192.168.99.100:5432/postgres", "postgres", "postgres");
+                val conn = DriverManager.getConnection("jdbc:mysql://192.168.99.100:3306/app", "app", "pass");
         ) {
             val creditStatusVal = runner.query(conn, creditStatus, new ScalarHandler<>());
             val paymentIdVal = runner.query(conn, paymentId, new ScalarHandler<>());

@@ -1,16 +1,28 @@
 # Use root/example as user/password credentials
 version: '3.7'
 services:
-  postgres:
-    image: postgres:latest
+ # postgres:
+  #  image: postgres:latest
+  #  ports:
+   #   - 5432:5432
+  #  volumes:
+  #    - ./data:/var/lib/postgres
+ #   environment:
+ #     - POSTGRES_DB=postgres
+ #     - POSTGRES_USER=postgres
+  #    - POSTGRES_PASSWORD=postgres
+  mysql:
+    image: mysql:latest
+    command: --innodb_use_native_aio=0
     ports:
-      - 5432:5432
+      - 3306:3306
     volumes:
-      - ./data:/var/lib/postgres
+      - ./data:/var/lib/mysql
     environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - MYSQL_DATABASE=app
+      - MYSQL_USER=app
+      - MYSQL_PASSWORD=pass
   node-app:
     build: .
     image: node-app:1.0
