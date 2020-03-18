@@ -1,16 +1,16 @@
 # Use root/example as user/password credentials
 version: '3.7'
 services:
- # postgres:
-  #  image: postgres:latest
-  #  ports:
-   #   - 5432:5432
-  #  volumes:
-  #    - ./data:/var/lib/postgres
- #   environment:
- #     - POSTGRES_DB=postgres
- #     - POSTGRES_USER=postgres
-  #    - POSTGRES_PASSWORD=postgres
+  postgres:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    volumes:
+      - ./data:/var/lib/postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
   mysql:
     image: mysql:latest
     command: --innodb_use_native_aio=0
