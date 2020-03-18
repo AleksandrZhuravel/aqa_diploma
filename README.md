@@ -1,5 +1,5 @@
 Статус проведенных тестов:
-[![Build status](https://ci.appveyor.com/api/projects/status/718rh8fb5h3ucy5h?svg=true)](https://ci.appveyor.com/project/AleksandrZhuravel/aqa-homework2-4-1)
+[![Build status](https://ci.appveyor.com/api/projects/status/1hoaj1pqi7wyit1r?svg=true)](https://ci.appveyor.com/project/AleksandrZhuravel/aqa-diploma)
 
 
 
