@@ -18,6 +18,7 @@ public class SQLHelper {
     String transactionId = "select transaction_id from payment_entity where created = (select max(created) from payment_entity);";
     String bankId = "select bank_id from credit_request_entity where created = (select max(created) from credit_request_entity);";
     String orderAmount = "select amount from payment_entity where created = (select max(created) from payment_entity);";
+    String rowCount = "SELECT COUNT(*) FROM order_entity;";
     QueryRunner runner = new QueryRunner();
 
     public void dbPayment(DataHelper.BankAnswer bankAnswer, DataHelper.OrderAmount orderAmountNumber) throws SQLException {
@@ -36,7 +37,6 @@ public class SQLHelper {
 
     }
 
-
     public void dbCredit(DataHelper.BankAnswer bankAnswer) throws SQLException {
         try (
                 // val conn = DriverManager.getConnection("jdbc:postgresql://192.168.99.100:5432/postgres", "postgres", "postgres");
@@ -51,4 +51,23 @@ public class SQLHelper {
 
     }
 
+    public long setRowCount() throws SQLException {
+        try (
+                // val conn = DriverManager.getConnection("jdbc:postgresql://192.168.99.100:5432/postgres", "postgres", "postgres");
+                val conn = DriverManager.getConnection("jdbc:mysql://192.168.99.100:3306/app", "app", "pass");
+        ) {
+            long rowCountFirst = runner.query(conn, rowCount, new ScalarHandler<>());
+            return rowCountFirst;
+        }
+    }
+
+    public long rowCountChecker() throws SQLException {
+        try (
+                // val conn = DriverManager.getConnection("jdbc:postgresql://192.168.99.100:5432/postgres", "postgres", "postgres");
+                val conn = DriverManager.getConnection("jdbc:mysql://192.168.99.100:3306/app", "app", "pass");
+        ) {
+            long rowCountSecond = runner.query(conn, rowCount, new ScalarHandler<>());
+            return rowCountSecond;
+        }
+    }
 }

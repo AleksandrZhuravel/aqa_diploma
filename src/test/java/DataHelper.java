@@ -156,5 +156,4 @@ public class DataHelper {
     public static OrderAmount getOrderAmountActual() {
         return new OrderAmount(4500000);
     }
-
 }
