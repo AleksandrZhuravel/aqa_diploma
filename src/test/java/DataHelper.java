@@ -11,7 +11,6 @@ public class DataHelper {
     @Value
     public static class CardNumber {
         private String cardNumber;
-
     }
 
     public static CardNumber getFirstCardNumber() {
@@ -135,25 +134,14 @@ public class DataHelper {
         return new CardCVV("@@");
     }
 
-    @Value
-    public static class BankAnswer {
-        private String bankAnswer;
+    public static String getApproved() { return "APPROVED";
     }
 
-    public static BankAnswer getApproved() {
-        return new BankAnswer("APPROVED");
+    public static String getDeclined() {
+        return "DECLINED";
     }
 
-    public static BankAnswer getDeclined() {
-        return new BankAnswer("DECLINED");
-    }
-
-    @Value
-    public static class OrderAmount {
-        private int orderAmountNumber;
-    }
-
-    public static OrderAmount getOrderAmountActual() {
-        return new OrderAmount(4500000);
+    public static int getOrderAmountActual() {
+        return 4500000;
     }
 }

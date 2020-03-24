@@ -5,12 +5,7 @@ import org.apache.commons.dbutils.handlers.ScalarHandler;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class SQLHelper {
-    public SQLHelper() {
-    }
 
     String paymentStatus = "select status from payment_entity where created = (select max(created) from payment_entity);";
     String creditStatus = "select status from credit_request_entity where created = (select max(created) from credit_request_entity);";
@@ -19,42 +14,68 @@ public class SQLHelper {
     String bankId = "select bank_id from credit_request_entity where created = (select max(created) from credit_request_entity);";
     String orderAmount = "select amount from payment_entity where created = (select max(created) from payment_entity);";
     String rowCount = "SELECT COUNT(*) FROM order_entity;";
+    //String url = "jdbc:mysql://192.168.99.100:3306/app";
+    //String user = "app";
+    //String password = "pass";
+    String url = "jdbc:postgresql://192.168.99.100:5432/postgres";
+    String user = "postgres";
+    String password = "postgres";
+
+
     QueryRunner runner = new QueryRunner();
 
-    public void dbPayment(DataHelper.BankAnswer bankAnswer, DataHelper.OrderAmount orderAmountNumber) throws SQLException {
+    public String checkPaymentStatus() throws SQLException {
         try (
-                // val conn = DriverManager.getConnection("jdbc:postgresql://192.168.99.100:5432/postgres", "postgres", "postgres");
-                val conn = DriverManager.getConnection("jdbc:mysql://192.168.99.100:3306/app", "app", "pass");
+                val conn = DriverManager.getConnection(url, user, password);
         ) {
-            val paymentStatusVal = runner.query(conn, paymentStatus, new ScalarHandler<>());
-            val paymentIdVal = runner.query(conn, paymentId, new ScalarHandler<>());
-            val transactionIdVal = runner.query(conn, transactionId, new ScalarHandler<>());
-            val orderAmountVal = runner.query(conn, orderAmount, new ScalarHandler<>());
-            assertEquals(bankAnswer.getBankAnswer(), paymentStatusVal);
-            assertEquals(transactionIdVal, paymentIdVal);
-            assertEquals(orderAmountNumber.getOrderAmountNumber(), orderAmountVal);
+            return runner.query(conn, paymentStatus, new ScalarHandler<>());
         }
-
     }
 
-    public void dbCredit(DataHelper.BankAnswer bankAnswer) throws SQLException {
+    public String checkPaymentId() throws SQLException {
         try (
-                // val conn = DriverManager.getConnection("jdbc:postgresql://192.168.99.100:5432/postgres", "postgres", "postgres");
-                val conn = DriverManager.getConnection("jdbc:mysql://192.168.99.100:3306/app", "app", "pass");
+                val conn = DriverManager.getConnection(url, user, password);
         ) {
-            val creditStatusVal = runner.query(conn, creditStatus, new ScalarHandler<>());
-            val paymentIdVal = runner.query(conn, paymentId, new ScalarHandler<>());
-            val bankIdVal = runner.query(conn, bankId, new ScalarHandler<>());
-            assertEquals(bankAnswer.getBankAnswer(), creditStatusVal);
-            assertEquals(bankIdVal, paymentIdVal);
+            return runner.query(conn, paymentId, new ScalarHandler<>());
         }
-
     }
 
-    public long setRowCount() throws SQLException {
+    public String checkTransactionId() throws SQLException {
         try (
-                // val conn = DriverManager.getConnection("jdbc:postgresql://192.168.99.100:5432/postgres", "postgres", "postgres");
-                val conn = DriverManager.getConnection("jdbc:mysql://192.168.99.100:3306/app", "app", "pass");
+                val conn = DriverManager.getConnection(url, user, password);
+        ) {
+            return runner.query(conn, transactionId, new ScalarHandler<>());
+        }
+    }
+
+    public int checkOrderAmount() throws SQLException {
+        try (
+                val conn = DriverManager.getConnection(url, user, password);
+        ) {
+            return runner.query(conn, orderAmount, new ScalarHandler<>());
+        }
+    }
+
+
+    public String checkCreditStatus() throws SQLException {
+        try (
+                val conn = DriverManager.getConnection(url, user, password);
+        ) {
+            return runner.query(conn, creditStatus, new ScalarHandler<>());
+        }
+    }
+
+    public String checkBankId() throws SQLException {
+        try (
+                val conn = DriverManager.getConnection(url, user, password);
+        ) {
+            return runner.query(conn, bankId, new ScalarHandler<>());
+        }
+    }
+
+    public long rowCount() throws SQLException {
+        try (
+                val conn = DriverManager.getConnection(url, user, password);
         ) {
             long rowCountFirst = runner.query(conn, rowCount, new ScalarHandler<>());
             return rowCountFirst;
@@ -63,8 +84,7 @@ public class SQLHelper {
 
     public long rowCountChecker() throws SQLException {
         try (
-                // val conn = DriverManager.getConnection("jdbc:postgresql://192.168.99.100:5432/postgres", "postgres", "postgres");
-                val conn = DriverManager.getConnection("jdbc:mysql://192.168.99.100:3306/app", "app", "pass");
+                val conn = DriverManager.getConnection(url, user, password);
         ) {
             long rowCountSecond = runner.query(conn, rowCount, new ScalarHandler<>());
             return rowCountSecond;

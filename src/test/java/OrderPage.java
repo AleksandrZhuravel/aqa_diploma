@@ -49,76 +49,91 @@ public class OrderPage {
         successMessage.waitUntil((Condition.visible), 15000);
     }
 
-    public void errorMessageCheck() {
+    public void checkErrorMessage() {
 
         errorMessage.waitUntil((Condition.visible), 15000);
     }
 
-    public void cardNumberInput(DataHelper.CardNumber cardNumber) {
+    public void inputCardNumber(DataHelper.CardNumber cardNumber) {
 
         cardNumberField.setValue(cardNumber.getCardNumber());
     }
 
-    public void cardMonthInput(DataHelper.CardMonth cardMonth) {
+    public void inputCardMonth(DataHelper.CardMonth cardMonth) {
         cardMonthField.setValue(cardMonth.getCardMonth());
     }
 
-    public void cardYearInput(DataHelper.CardYear cardYear) {
+    public void inputCardYear(DataHelper.CardYear cardYear) {
         cardYearField.setValue(cardYear.getCardYear());
     }
 
-    public void customerNameInput(DataHelper.CustomerName customerName) {
+    public void inputCustomerName(DataHelper.CustomerName customerName) {
         customerNameField.setValue(customerName.getCustomerName());
     }
 
-    public void cardCVVInput(DataHelper.CardCVV cardCVV) {
+    public void inputCardCVV(DataHelper.CardCVV cardCVV) {
         cvvNumberField.setValue(cardCVV.getCardCVV());
     }
 
-    public void emptyFields() {
+    public void checkEmptyCardNumberField() {
         cardNumberField.shouldBe(Condition.empty);
         cardNumberFieldEmptyMessage.shouldBe(Condition.visible);
         cardNumberFieldEmptyMessage.shouldHave(text("Неверный формат"));
         cardNumberFieldEmptyMessage.shouldHave(cssValue("color", "rgba(255, 92, 92, 1)"));
-
+    }
+    public void checkEmptyCardMonthField() {
         cardMonthField.shouldBe(Condition.empty);
         cardMonthFieldEmptyMessage.shouldBe(Condition.visible);
         cardMonthFieldEmptyMessage.shouldHave(text("Неверный формат"));
         cardMonthFieldEmptyMessage.shouldHave(cssValue("color", "rgba(255, 92, 92, 1)"));
+    }
 
+    public void checkEmptyCardYearField() {
         cardYearField.shouldBe(Condition.empty);
         cardYearFieldEmptyMessage.shouldBe(Condition.visible);
         cardYearFieldEmptyMessage.shouldHave(text("Неверный формат"));
         cardYearFieldEmptyMessage.shouldHave(cssValue("color", "rgba(255, 92, 92, 1)"));
+    }
 
+    public void checkEmptyCustomerNameField() {
         customerNameField.shouldBe(Condition.empty);
         customerNameFieldEmptyMessage.shouldBe(Condition.visible);
         customerNameFieldEmptyMessage.shouldHave(text("Поле обязательно для заполнения"));
         customerNameFieldEmptyMessage.shouldHave(cssValue("color", "rgba(255, 92, 92, 1)"));
+    }
 
+    public void checkEmptyCVVNumberField() {
         cvvNumberField.shouldBe(Condition.empty);
         cvvNumberFieldEmptyMessage.shouldBe(Condition.visible);
         cvvNumberFieldEmptyMessage.shouldHave(text("Неверный формат"));
         cvvNumberFieldEmptyMessage.shouldHave(cssValue("color", "rgba(255, 92, 92, 1)"));
     }
 
-    public void emptyFieldsMessage() {
+    public void checkCardNumberFieldEmptyMessage() {
         cardNumberFieldEmptyMessage.shouldBe(Condition.visible);
         cardNumberFieldEmptyMessage.shouldHave(text("Неверный формат"));
         cardNumberFieldEmptyMessage.shouldHave(cssValue("color", "rgba(255, 92, 92, 1)"));
+    }
 
+    public void checkCardMonthFieldEmptyMessage() {
         cardMonthFieldEmptyMessage.shouldBe(Condition.visible);
         cardMonthFieldEmptyMessage.shouldHave(text("Неверный формат"));
         cardMonthFieldEmptyMessage.shouldHave(cssValue("color", "rgba(255, 92, 92, 1)"));
+    }
 
+    public void checkCardYearFieldEmptyMessage() {
         cardYearFieldEmptyMessage.shouldBe(Condition.visible);
         cardYearFieldEmptyMessage.shouldHave(text("Неверный формат"));
         cardYearFieldEmptyMessage.shouldHave(cssValue("color", "rgba(255, 92, 92, 1)"));
+    }
 
+    public void checkCustomerNameFieldEmptyMessage() {
         customerNameFieldEmptyMessage.shouldBe(Condition.visible);
         customerNameFieldEmptyMessage.shouldHave(text("Поле обязательно для заполнения"));
         customerNameFieldEmptyMessage.shouldHave(cssValue("color", "rgba(255, 92, 92, 1)"));
+    }
 
+    public void checkCVVNumberFieldEmptyMessage() {
         cvvNumberFieldEmptyMessage.shouldBe(Condition.visible);
         cvvNumberFieldEmptyMessage.shouldHave(text("Неверный формат"));
         cvvNumberFieldEmptyMessage.shouldHave(cssValue("color", "rgba(255, 92, 92, 1)"));
@@ -128,15 +143,11 @@ public class OrderPage {
         cardMonthFieldEmptyMessage.shouldBe(Condition.visible);
         cardMonthFieldEmptyMessage.shouldHave(text("Неверно указан срок действия карты"));
         cardMonthFieldEmptyMessage.shouldHave(cssValue("color", "rgba(255, 92, 92, 1)"));
-
     }
-
 
     public void lastYearMessage() {
         cardYearFieldEmptyMessage.shouldBe(Condition.visible);
         cardYearFieldEmptyMessage.shouldHave(text("Истёк срок действия карты"));
         cardYearFieldEmptyMessage.shouldHave(cssValue("color", "rgba(255, 92, 92, 1)"));
     }
-
-
 }

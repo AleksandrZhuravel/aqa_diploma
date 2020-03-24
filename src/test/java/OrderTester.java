@@ -30,17 +30,19 @@ public class OrderTester {
     void orderShouldBeApprovedWithCardFortyOne() throws SQLException {
         val orderPage = new OrderPage();
         val sqlHelper = new SQLHelper();
-        long rowCountFirst = sqlHelper.setRowCount();
+        long rowCountFirst = sqlHelper.rowCount();
         orderPage.choicePayment();
-        orderPage.cardNumberInput(DataHelper.getFirstCardNumber());
-        orderPage.cardMonthInput(DataHelper.getThisMonth());
-        orderPage.cardYearInput(DataHelper.getNextYear());
-        orderPage.customerNameInput(DataHelper.getCorrectCustomerName());
-        orderPage.cardCVVInput(DataHelper.getCorrectCVV());
+        orderPage.inputCardNumber(DataHelper.getFirstCardNumber());
+        orderPage.inputCardMonth(DataHelper.getThisMonth());
+        orderPage.inputCardYear(DataHelper.getNextYear());
+        orderPage.inputCustomerName(DataHelper.getCorrectCustomerName());
+        orderPage.inputCardCVV(DataHelper.getCorrectCVV());
         orderPage.continueClick();
         orderPage.successMessageCheck();
         assertEquals(rowCountFirst + 1, sqlHelper.rowCountChecker());
-        sqlHelper.dbPayment(DataHelper.getApproved(), DataHelper.getOrderAmountActual());
+        assertEquals(DataHelper.getApproved(), sqlHelper.checkPaymentStatus());
+        assertEquals(sqlHelper.checkTransactionId(), sqlHelper.checkPaymentId());
+        assertEquals(DataHelper.getOrderAmountActual(), sqlHelper.checkOrderAmount());
     }
 
     @Test
@@ -48,18 +50,20 @@ public class OrderTester {
     void orderShouldBeApprovedWithCardFortyTwo() throws SQLException {
         val orderPage = new OrderPage();
         val sqlHelper = new SQLHelper();
-        long rowCountFirst = sqlHelper.setRowCount();
-        sqlHelper.setRowCount();
+        long rowCountFirst = sqlHelper.rowCount();
+        sqlHelper.rowCount();
         orderPage.choicePayment();
-        orderPage.cardNumberInput(DataHelper.getSecondCardNumber());
-        orderPage.cardMonthInput(DataHelper.getThisMonth());
-        orderPage.cardYearInput(DataHelper.getNextYear());
-        orderPage.customerNameInput(DataHelper.getCorrectCustomerName());
-        orderPage.cardCVVInput(DataHelper.getCorrectCVV());
+        orderPage.inputCardNumber(DataHelper.getSecondCardNumber());
+        orderPage.inputCardMonth(DataHelper.getThisMonth());
+        orderPage.inputCardYear(DataHelper.getNextYear());
+        orderPage.inputCustomerName(DataHelper.getCorrectCustomerName());
+        orderPage.inputCardCVV(DataHelper.getCorrectCVV());
         orderPage.continueClick();
         orderPage.successMessageCheck();
         assertEquals(rowCountFirst + 1, sqlHelper.rowCountChecker());
-        sqlHelper.dbPayment(DataHelper.getDeclined(), DataHelper.getOrderAmountActual());
+        assertEquals("DECLINED", sqlHelper.checkPaymentStatus());
+        assertEquals(sqlHelper.checkTransactionId(), sqlHelper.checkPaymentId());
+        assertEquals(DataHelper.getOrderAmountActual(), sqlHelper.checkOrderAmount());
     }
 
     @Test
@@ -67,16 +71,16 @@ public class OrderTester {
     void orderShouldBeDeniedWithCardFortyThree() throws SQLException {
         val orderPage = new OrderPage();
         val sqlHelper = new SQLHelper();
-        long rowCountFirst = sqlHelper.setRowCount();
-        sqlHelper.setRowCount();
+        long rowCountFirst = sqlHelper.rowCount();
+        sqlHelper.rowCount();
         orderPage.choicePayment();
-        orderPage.cardNumberInput(DataHelper.getThirdCardNumber());
-        orderPage.cardMonthInput(DataHelper.getThisMonth());
-        orderPage.cardYearInput(DataHelper.getNextYear());
-        orderPage.customerNameInput(DataHelper.getCorrectCustomerName());
-        orderPage.cardCVVInput(DataHelper.getCorrectCVV());
+        orderPage.inputCardNumber(DataHelper.getThirdCardNumber());
+        orderPage.inputCardMonth(DataHelper.getThisMonth());
+        orderPage.inputCardYear(DataHelper.getNextYear());
+        orderPage.inputCustomerName(DataHelper.getCorrectCustomerName());
+        orderPage.inputCardCVV(DataHelper.getCorrectCVV());
         orderPage.continueClick();
-        orderPage.errorMessageCheck();
+        orderPage.checkErrorMessage();
         assertEquals(rowCountFirst, sqlHelper.rowCountChecker());
     }
 
@@ -85,15 +89,19 @@ public class OrderTester {
     void incorrectValuesWillNotBeEntered() throws SQLException {
         val orderPage = new OrderPage();
         val sqlHelper = new SQLHelper();
-        long rowCountFirst = sqlHelper.setRowCount();
+        long rowCountFirst = sqlHelper.rowCount();
         orderPage.choicePayment();
-        orderPage.cardNumberInput(DataHelper.getIncorrectCardNumber());
-        orderPage.cardMonthInput(DataHelper.getIncorrectMonth());
-        orderPage.cardYearInput(DataHelper.getIncorrectYear());
-        orderPage.customerNameInput(DataHelper.getIncorrectCustomerName());
-        orderPage.cardCVVInput(DataHelper.getIncorrectCVV());
+        orderPage.inputCardNumber(DataHelper.getIncorrectCardNumber());
+        orderPage.inputCardMonth(DataHelper.getIncorrectMonth());
+        orderPage.inputCardYear(DataHelper.getIncorrectYear());
+        orderPage.inputCustomerName(DataHelper.getIncorrectCustomerName());
+        orderPage.inputCardCVV(DataHelper.getIncorrectCVV());
         orderPage.continueClick();
-        orderPage.emptyFields();
+        orderPage.checkEmptyCardNumberField();
+        orderPage.checkEmptyCardMonthField();
+        orderPage.checkEmptyCardYearField();
+        orderPage.checkEmptyCustomerNameField();
+        orderPage.checkEmptyCVVNumberField();
         assertEquals(rowCountFirst, sqlHelper.rowCountChecker());
     }
 
@@ -102,15 +110,19 @@ public class OrderTester {
     void specialsWillNotBeEntered() throws SQLException {
         val orderPage = new OrderPage();
         val sqlHelper = new SQLHelper();
-        long rowCountFirst = sqlHelper.setRowCount();
+        long rowCountFirst = sqlHelper.rowCount();
         orderPage.choicePayment();
-        orderPage.cardNumberInput(DataHelper.getSpecialsCardNumber());
-        orderPage.cardMonthInput(DataHelper.getSpecialsCardMonth());
-        orderPage.cardYearInput(DataHelper.getSpecialsCardYear());
-        orderPage.customerNameInput(DataHelper.getSpecialsCustomerName());
-        orderPage.cardCVVInput(DataHelper.getSpecialsCardCVV());
+        orderPage.inputCardNumber(DataHelper.getSpecialsCardNumber());
+        orderPage.inputCardMonth(DataHelper.getSpecialsCardMonth());
+        orderPage.inputCardYear(DataHelper.getSpecialsCardYear());
+        orderPage.inputCustomerName(DataHelper.getSpecialsCustomerName());
+        orderPage.inputCardCVV(DataHelper.getSpecialsCardCVV());
         orderPage.continueClick();
-        orderPage.emptyFields();
+        orderPage.checkEmptyCardNumberField();
+        orderPage.checkEmptyCardMonthField();
+        orderPage.checkEmptyCardYearField();
+        orderPage.checkEmptyCustomerNameField();
+        orderPage.checkEmptyCVVNumberField();
         assertEquals(rowCountFirst, sqlHelper.rowCountChecker());
     }
 
@@ -120,10 +132,14 @@ public class OrderTester {
     void emptyFieldsShouldBeHighlighted() throws SQLException {
         val orderPage = new OrderPage();
         val sqlHelper = new SQLHelper();
-        long rowCountFirst = sqlHelper.setRowCount();
+        long rowCountFirst = sqlHelper.rowCount();
         orderPage.choicePayment();
         orderPage.continueClick();
-        orderPage.emptyFieldsMessage();
+        orderPage.checkCardNumberFieldEmptyMessage();
+        orderPage.checkCardMonthFieldEmptyMessage();
+        orderPage.checkCardYearFieldEmptyMessage();
+        orderPage.checkCustomerNameFieldEmptyMessage();
+        orderPage.checkCVVNumberFieldEmptyMessage();
         assertEquals(rowCountFirst, sqlHelper.rowCountChecker());
     }
 
@@ -133,14 +149,14 @@ public class OrderTester {
     void nonexistentMonthShouldBeAllocated() throws SQLException {
         val orderPage = new OrderPage();
         val sqlHelper = new SQLHelper();
-        long rowCountFirst = sqlHelper.setRowCount();
+        long rowCountFirst = sqlHelper.rowCount();
         orderPage.choicePayment();
         orderPage.continueClick();
-        orderPage.cardNumberInput(DataHelper.getSecondCardNumber());
-        orderPage.cardMonthInput(DataHelper.getFalseMonth());
-        orderPage.cardYearInput(DataHelper.getNextYear());
-        orderPage.customerNameInput(DataHelper.getCorrectCustomerName());
-        orderPage.cardCVVInput(DataHelper.getCorrectCVV());
+        orderPage.inputCardNumber(DataHelper.getSecondCardNumber());
+        orderPage.inputCardMonth(DataHelper.getFalseMonth());
+        orderPage.inputCardYear(DataHelper.getNextYear());
+        orderPage.inputCustomerName(DataHelper.getCorrectCustomerName());
+        orderPage.inputCardCVV(DataHelper.getCorrectCVV());
         orderPage.continueClick();
         orderPage.falseMonthMessage();
         assertEquals(rowCountFirst, sqlHelper.rowCountChecker());
@@ -151,14 +167,14 @@ public class OrderTester {
     void expiredMonthCardShouldBeAllocated() throws SQLException {
         val orderPage = new OrderPage();
         val sqlHelper = new SQLHelper();
-        long rowCountFirst = sqlHelper.setRowCount();
+        long rowCountFirst = sqlHelper.rowCount();
         orderPage.choicePayment();
         orderPage.continueClick();
-        orderPage.cardNumberInput(DataHelper.getSecondCardNumber());
-        orderPage.cardMonthInput(DataHelper.getLastMonth());
-        orderPage.cardYearInput(DataHelper.getThisYear());
-        orderPage.customerNameInput(DataHelper.getCorrectCustomerName());
-        orderPage.cardCVVInput(DataHelper.getCorrectCVV());
+        orderPage.inputCardNumber(DataHelper.getSecondCardNumber());
+        orderPage.inputCardMonth(DataHelper.getLastMonth());
+        orderPage.inputCardYear(DataHelper.getThisYear());
+        orderPage.inputCustomerName(DataHelper.getCorrectCustomerName());
+        orderPage.inputCardCVV(DataHelper.getCorrectCVV());
         orderPage.continueClick();
         orderPage.falseMonthMessage();
         assertEquals(rowCountFirst, sqlHelper.rowCountChecker());
@@ -169,14 +185,14 @@ public class OrderTester {
     void expiredYearCardShouldBeAllocated() throws SQLException {
         val orderPage = new OrderPage();
         val sqlHelper = new SQLHelper();
-        long rowCountFirst = sqlHelper.setRowCount();
+        long rowCountFirst = sqlHelper.rowCount();
         orderPage.choicePayment();
         orderPage.continueClick();
-        orderPage.cardNumberInput(DataHelper.getSecondCardNumber());
-        orderPage.cardMonthInput(DataHelper.getThisMonth());
-        orderPage.cardYearInput(DataHelper.getLastYear());
-        orderPage.customerNameInput(DataHelper.getCorrectCustomerName());
-        orderPage.cardCVVInput(DataHelper.getCorrectCVV());
+        orderPage.inputCardNumber(DataHelper.getSecondCardNumber());
+        orderPage.inputCardMonth(DataHelper.getThisMonth());
+        orderPage.inputCardYear(DataHelper.getLastYear());
+        orderPage.inputCustomerName(DataHelper.getCorrectCustomerName());
+        orderPage.inputCardCVV(DataHelper.getCorrectCVV());
         orderPage.continueClick();
         orderPage.lastYearMessage();
         assertEquals(rowCountFirst, sqlHelper.rowCountChecker());
@@ -187,17 +203,18 @@ public class OrderTester {
     void creditShouldBeApprovedWithCardFortyOne() throws SQLException {
         val orderPage = new OrderPage();
         val sqlHelper = new SQLHelper();
-        long rowCountFirst = sqlHelper.setRowCount();
+        long rowCountFirst = sqlHelper.rowCount();
         orderPage.choiceCredit();
-        orderPage.cardNumberInput(DataHelper.getFirstCardNumber());
-        orderPage.cardMonthInput(DataHelper.getThisMonth());
-        orderPage.cardYearInput(DataHelper.getNextYear());
-        orderPage.customerNameInput(DataHelper.getCorrectCustomerName());
-        orderPage.cardCVVInput(DataHelper.getCorrectCVV());
+        orderPage.inputCardNumber(DataHelper.getFirstCardNumber());
+        orderPage.inputCardMonth(DataHelper.getThisMonth());
+        orderPage.inputCardYear(DataHelper.getNextYear());
+        orderPage.inputCustomerName(DataHelper.getCorrectCustomerName());
+        orderPage.inputCardCVV(DataHelper.getCorrectCVV());
         orderPage.continueClick();
         orderPage.successMessageCheck();
         assertEquals(rowCountFirst + 1, sqlHelper.rowCountChecker());
-        sqlHelper.dbCredit(DataHelper.getApproved());
+        assertEquals(DataHelper.getApproved(), sqlHelper.checkCreditStatus());
+        assertEquals(sqlHelper.checkBankId(), sqlHelper.checkPaymentId());
     }
 
     @Test
@@ -205,17 +222,18 @@ public class OrderTester {
     void creditShouldBeApprovedWithCardFortyTwo() throws SQLException {
         val orderPage = new OrderPage();
         val sqlHelper = new SQLHelper();
-        long rowCountFirst = sqlHelper.setRowCount();
+        long rowCountFirst = sqlHelper.rowCount();
         orderPage.choiceCredit();
-        orderPage.cardNumberInput(DataHelper.getSecondCardNumber());
-        orderPage.cardMonthInput(DataHelper.getThisMonth());
-        orderPage.cardYearInput(DataHelper.getNextYear());
-        orderPage.customerNameInput(DataHelper.getCorrectCustomerName());
-        orderPage.cardCVVInput(DataHelper.getCorrectCVV());
+        orderPage.inputCardNumber(DataHelper.getSecondCardNumber());
+        orderPage.inputCardMonth(DataHelper.getThisMonth());
+        orderPage.inputCardYear(DataHelper.getNextYear());
+        orderPage.inputCustomerName(DataHelper.getCorrectCustomerName());
+        orderPage.inputCardCVV(DataHelper.getCorrectCVV());
         orderPage.continueClick();
         orderPage.successMessageCheck();
-        sqlHelper.dbCredit(DataHelper.getDeclined());
         assertEquals(rowCountFirst + 1, sqlHelper.rowCountChecker());
+        assertEquals(DataHelper.getDeclined(), sqlHelper.checkCreditStatus());
+        assertEquals(sqlHelper.checkBankId(), sqlHelper.checkPaymentId());
     }
 
     @Test
@@ -223,15 +241,15 @@ public class OrderTester {
     void creditShouldBeDeniedWithCardFortyThree() throws SQLException {
         val orderPage = new OrderPage();
         val sqlHelper = new SQLHelper();
-        long rowCountFirst = sqlHelper.setRowCount();
+        long rowCountFirst = sqlHelper.rowCount();
         orderPage.choiceCredit();
-        orderPage.cardNumberInput(DataHelper.getThirdCardNumber());
-        orderPage.cardMonthInput(DataHelper.getThisMonth());
-        orderPage.cardYearInput(DataHelper.getNextYear());
-        orderPage.customerNameInput(DataHelper.getCorrectCustomerName());
-        orderPage.cardCVVInput(DataHelper.getCorrectCVV());
+        orderPage.inputCardNumber(DataHelper.getThirdCardNumber());
+        orderPage.inputCardMonth(DataHelper.getThisMonth());
+        orderPage.inputCardYear(DataHelper.getNextYear());
+        orderPage.inputCustomerName(DataHelper.getCorrectCustomerName());
+        orderPage.inputCardCVV(DataHelper.getCorrectCVV());
         orderPage.continueClick();
-        orderPage.errorMessageCheck();
+        orderPage.checkErrorMessage();
         assertEquals(rowCountFirst, sqlHelper.rowCountChecker());
     }
 
@@ -240,15 +258,19 @@ public class OrderTester {
     void incorrectValuesWillNotBeEnteredCredit() throws SQLException {
         val orderPage = new OrderPage();
         val sqlHelper = new SQLHelper();
-        long rowCountFirst = sqlHelper.setRowCount();
+        long rowCountFirst = sqlHelper.rowCount();
         orderPage.choiceCredit();
-        orderPage.cardNumberInput(DataHelper.getIncorrectCardNumber());
-        orderPage.cardMonthInput(DataHelper.getIncorrectMonth());
-        orderPage.cardYearInput(DataHelper.getIncorrectYear());
-        orderPage.customerNameInput(DataHelper.getIncorrectCustomerName());
-        orderPage.cardCVVInput(DataHelper.getIncorrectCVV());
+        orderPage.inputCardNumber(DataHelper.getIncorrectCardNumber());
+        orderPage.inputCardMonth(DataHelper.getIncorrectMonth());
+        orderPage.inputCardYear(DataHelper.getIncorrectYear());
+        orderPage.inputCustomerName(DataHelper.getIncorrectCustomerName());
+        orderPage.inputCardCVV(DataHelper.getIncorrectCVV());
         orderPage.continueClick();
-        orderPage.emptyFields();
+        orderPage.checkEmptyCardNumberField();
+        orderPage.checkEmptyCardMonthField();
+        orderPage.checkEmptyCardYearField();
+        orderPage.checkEmptyCustomerNameField();
+        orderPage.checkEmptyCVVNumberField();
         assertEquals(rowCountFirst, sqlHelper.rowCountChecker());
     }
 
@@ -257,15 +279,19 @@ public class OrderTester {
     void specialsWillNotBeEnteredCredit() throws SQLException {
         val orderPage = new OrderPage();
         val sqlHelper = new SQLHelper();
-        long rowCountFirst = sqlHelper.setRowCount();
+        long rowCountFirst = sqlHelper.rowCount();
         orderPage.choiceCredit();
-        orderPage.cardNumberInput(DataHelper.getSpecialsCardNumber());
-        orderPage.cardMonthInput(DataHelper.getSpecialsCardMonth());
-        orderPage.cardYearInput(DataHelper.getSpecialsCardYear());
-        orderPage.customerNameInput(DataHelper.getSpecialsCustomerName());
-        orderPage.cardCVVInput(DataHelper.getSpecialsCardCVV());
+        orderPage.inputCardNumber(DataHelper.getSpecialsCardNumber());
+        orderPage.inputCardMonth(DataHelper.getSpecialsCardMonth());
+        orderPage.inputCardYear(DataHelper.getSpecialsCardYear());
+        orderPage.inputCustomerName(DataHelper.getSpecialsCustomerName());
+        orderPage.inputCardCVV(DataHelper.getSpecialsCardCVV());
         orderPage.continueClick();
-        orderPage.emptyFields();
+        orderPage.checkEmptyCardNumberField();
+        orderPage.checkEmptyCardMonthField();
+        orderPage.checkEmptyCardYearField();
+        orderPage.checkEmptyCustomerNameField();
+        orderPage.checkEmptyCVVNumberField();
         assertEquals(rowCountFirst, sqlHelper.rowCountChecker());
     }
 
@@ -275,10 +301,14 @@ public class OrderTester {
     void emptyFieldsShouldBeHighlightedCredit() throws SQLException {
         val orderPage = new OrderPage();
         val sqlHelper = new SQLHelper();
-        long rowCountFirst = sqlHelper.setRowCount();
+        long rowCountFirst = sqlHelper.rowCount();
         orderPage.choiceCredit();
         orderPage.continueClick();
-        orderPage.emptyFieldsMessage();
+        orderPage.checkCardNumberFieldEmptyMessage();
+        orderPage.checkCardMonthFieldEmptyMessage();
+        orderPage.checkCardYearFieldEmptyMessage();
+        orderPage.checkCustomerNameFieldEmptyMessage();
+        orderPage.checkCVVNumberFieldEmptyMessage();
         assertEquals(rowCountFirst, sqlHelper.rowCountChecker());
     }
 
@@ -288,14 +318,14 @@ public class OrderTester {
     void nonexistentMonthShouldBeAllocatedCredit() throws SQLException {
         val orderPage = new OrderPage();
         val sqlHelper = new SQLHelper();
-        long rowCountFirst = sqlHelper.setRowCount();
+        long rowCountFirst = sqlHelper.rowCount();
         orderPage.choiceCredit();
         orderPage.continueClick();
-        orderPage.cardNumberInput(DataHelper.getSecondCardNumber());
-        orderPage.cardMonthInput(DataHelper.getFalseMonth());
-        orderPage.cardYearInput(DataHelper.getNextYear());
-        orderPage.customerNameInput(DataHelper.getCorrectCustomerName());
-        orderPage.cardCVVInput(DataHelper.getCorrectCVV());
+        orderPage.inputCardNumber(DataHelper.getSecondCardNumber());
+        orderPage.inputCardMonth(DataHelper.getFalseMonth());
+        orderPage.inputCardYear(DataHelper.getNextYear());
+        orderPage.inputCustomerName(DataHelper.getCorrectCustomerName());
+        orderPage.inputCardCVV(DataHelper.getCorrectCVV());
         orderPage.continueClick();
         orderPage.falseMonthMessage();
         assertEquals(rowCountFirst, sqlHelper.rowCountChecker());
@@ -306,14 +336,14 @@ public class OrderTester {
     void expiredMonthCreditCardShouldBeAllocated() throws SQLException {
         val orderPage = new OrderPage();
         val sqlHelper = new SQLHelper();
-        long rowCountFirst = sqlHelper.setRowCount();
+        long rowCountFirst = sqlHelper.rowCount();
         orderPage.choiceCredit();
         orderPage.continueClick();
-        orderPage.cardNumberInput(DataHelper.getSecondCardNumber());
-        orderPage.cardMonthInput(DataHelper.getLastMonth());
-        orderPage.cardYearInput(DataHelper.getThisYear());
-        orderPage.customerNameInput(DataHelper.getCorrectCustomerName());
-        orderPage.cardCVVInput(DataHelper.getCorrectCVV());
+        orderPage.inputCardNumber(DataHelper.getSecondCardNumber());
+        orderPage.inputCardMonth(DataHelper.getLastMonth());
+        orderPage.inputCardYear(DataHelper.getThisYear());
+        orderPage.inputCustomerName(DataHelper.getCorrectCustomerName());
+        orderPage.inputCardCVV(DataHelper.getCorrectCVV());
         orderPage.continueClick();
         orderPage.falseMonthMessage();
         assertEquals(rowCountFirst, sqlHelper.rowCountChecker());
@@ -324,14 +354,14 @@ public class OrderTester {
     void expiredYearCreditCardShouldBeAllocated() throws SQLException {
         val orderPage = new OrderPage();
         val sqlHelper = new SQLHelper();
-        long rowCountFirst = sqlHelper.setRowCount();
+        long rowCountFirst = sqlHelper.rowCount();
         orderPage.choiceCredit();
         orderPage.continueClick();
-        orderPage.cardNumberInput(DataHelper.getSecondCardNumber());
-        orderPage.cardMonthInput(DataHelper.getThisMonth());
-        orderPage.cardYearInput(DataHelper.getLastYear());
-        orderPage.customerNameInput(DataHelper.getCorrectCustomerName());
-        orderPage.cardCVVInput(DataHelper.getCorrectCVV());
+        orderPage.inputCardNumber(DataHelper.getSecondCardNumber());
+        orderPage.inputCardMonth(DataHelper.getThisMonth());
+        orderPage.inputCardYear(DataHelper.getLastYear());
+        orderPage.inputCustomerName(DataHelper.getCorrectCustomerName());
+        orderPage.inputCardCVV(DataHelper.getCorrectCVV());
         orderPage.continueClick();
         orderPage.lastYearMessage();
         assertEquals(rowCountFirst, sqlHelper.rowCountChecker());
