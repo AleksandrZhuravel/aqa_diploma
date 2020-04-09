@@ -14,13 +14,9 @@ public class SQLHelper {
     String bankId = "select bank_id from credit_request_entity where created = (select max(created) from credit_request_entity);";
     String orderAmount = "select amount from payment_entity where created = (select max(created) from payment_entity);";
     String rowCount = "SELECT COUNT(*) FROM order_entity;";
-    //String url = "jdbc:mysql://192.168.99.100:3306/app";
-    //String user = "app";
-    //String password = "pass";
-    String url = "jdbc:postgresql://192.168.99.100:5432/postgres";
-    String user = "postgres";
-    String password = "postgres";
-
+    String url = System.getProperty("test.db.url");
+    String user = System.getProperty("test.db.user");
+    String password = System.getProperty("test.db.password");
 
     QueryRunner runner = new QueryRunner();
 

@@ -81,6 +81,7 @@ public class OrderPage {
         cardNumberFieldEmptyMessage.shouldHave(text("Неверный формат"));
         cardNumberFieldEmptyMessage.shouldHave(cssValue("color", "rgba(255, 92, 92, 1)"));
     }
+
     public void checkEmptyCardMonthField() {
         cardMonthField.shouldBe(Condition.empty);
         cardMonthFieldEmptyMessage.shouldBe(Condition.visible);

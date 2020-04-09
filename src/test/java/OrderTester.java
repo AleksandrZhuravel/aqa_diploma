@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class OrderTester {
 
     @BeforeEach
-    public void openPage() throws SQLException {
+    public void openPage() {
         open("http://localhost:8080/");
     }
 
@@ -32,7 +32,7 @@ public class OrderTester {
         val sqlHelper = new SQLHelper();
         long rowCountFirst = sqlHelper.rowCount();
         orderPage.choicePayment();
-        orderPage.inputCardNumber(DataHelper.getFirstCardNumber());
+        orderPage.inputCardNumber(DataHelper.CardNumber.getFirstCardNumber());
         orderPage.inputCardMonth(DataHelper.getThisMonth());
         orderPage.inputCardYear(DataHelper.getNextYear());
         orderPage.inputCustomerName(DataHelper.getCorrectCustomerName());
@@ -53,7 +53,7 @@ public class OrderTester {
         long rowCountFirst = sqlHelper.rowCount();
         sqlHelper.rowCount();
         orderPage.choicePayment();
-        orderPage.inputCardNumber(DataHelper.getSecondCardNumber());
+        orderPage.inputCardNumber(DataHelper.CardNumber.getSecondCardNumber());
         orderPage.inputCardMonth(DataHelper.getThisMonth());
         orderPage.inputCardYear(DataHelper.getNextYear());
         orderPage.inputCustomerName(DataHelper.getCorrectCustomerName());
@@ -74,7 +74,7 @@ public class OrderTester {
         long rowCountFirst = sqlHelper.rowCount();
         sqlHelper.rowCount();
         orderPage.choicePayment();
-        orderPage.inputCardNumber(DataHelper.getThirdCardNumber());
+        orderPage.inputCardNumber(DataHelper.CardNumber.getThirdCardNumber());
         orderPage.inputCardMonth(DataHelper.getThisMonth());
         orderPage.inputCardYear(DataHelper.getNextYear());
         orderPage.inputCustomerName(DataHelper.getCorrectCustomerName());
@@ -91,7 +91,7 @@ public class OrderTester {
         val sqlHelper = new SQLHelper();
         long rowCountFirst = sqlHelper.rowCount();
         orderPage.choicePayment();
-        orderPage.inputCardNumber(DataHelper.getIncorrectCardNumber());
+        orderPage.inputCardNumber(DataHelper.CardNumber.getIncorrectCardNumber());
         orderPage.inputCardMonth(DataHelper.getIncorrectMonth());
         orderPage.inputCardYear(DataHelper.getIncorrectYear());
         orderPage.inputCustomerName(DataHelper.getIncorrectCustomerName());
@@ -112,7 +112,7 @@ public class OrderTester {
         val sqlHelper = new SQLHelper();
         long rowCountFirst = sqlHelper.rowCount();
         orderPage.choicePayment();
-        orderPage.inputCardNumber(DataHelper.getSpecialsCardNumber());
+        orderPage.inputCardNumber(DataHelper.CardNumber.getSpecialsCardNumber());
         orderPage.inputCardMonth(DataHelper.getSpecialsCardMonth());
         orderPage.inputCardYear(DataHelper.getSpecialsCardYear());
         orderPage.inputCustomerName(DataHelper.getSpecialsCustomerName());
@@ -152,7 +152,7 @@ public class OrderTester {
         long rowCountFirst = sqlHelper.rowCount();
         orderPage.choicePayment();
         orderPage.continueClick();
-        orderPage.inputCardNumber(DataHelper.getSecondCardNumber());
+        orderPage.inputCardNumber(DataHelper.CardNumber.getSecondCardNumber());
         orderPage.inputCardMonth(DataHelper.getFalseMonth());
         orderPage.inputCardYear(DataHelper.getNextYear());
         orderPage.inputCustomerName(DataHelper.getCorrectCustomerName());
@@ -170,7 +170,7 @@ public class OrderTester {
         long rowCountFirst = sqlHelper.rowCount();
         orderPage.choicePayment();
         orderPage.continueClick();
-        orderPage.inputCardNumber(DataHelper.getSecondCardNumber());
+        orderPage.inputCardNumber(DataHelper.CardNumber.getSecondCardNumber());
         orderPage.inputCardMonth(DataHelper.getLastMonth());
         orderPage.inputCardYear(DataHelper.getThisYear());
         orderPage.inputCustomerName(DataHelper.getCorrectCustomerName());
@@ -188,7 +188,7 @@ public class OrderTester {
         long rowCountFirst = sqlHelper.rowCount();
         orderPage.choicePayment();
         orderPage.continueClick();
-        orderPage.inputCardNumber(DataHelper.getSecondCardNumber());
+        orderPage.inputCardNumber(DataHelper.CardNumber.getSecondCardNumber());
         orderPage.inputCardMonth(DataHelper.getThisMonth());
         orderPage.inputCardYear(DataHelper.getLastYear());
         orderPage.inputCustomerName(DataHelper.getCorrectCustomerName());
@@ -205,7 +205,7 @@ public class OrderTester {
         val sqlHelper = new SQLHelper();
         long rowCountFirst = sqlHelper.rowCount();
         orderPage.choiceCredit();
-        orderPage.inputCardNumber(DataHelper.getFirstCardNumber());
+        orderPage.inputCardNumber(DataHelper.CardNumber.getFirstCardNumber());
         orderPage.inputCardMonth(DataHelper.getThisMonth());
         orderPage.inputCardYear(DataHelper.getNextYear());
         orderPage.inputCustomerName(DataHelper.getCorrectCustomerName());
@@ -224,7 +224,7 @@ public class OrderTester {
         val sqlHelper = new SQLHelper();
         long rowCountFirst = sqlHelper.rowCount();
         orderPage.choiceCredit();
-        orderPage.inputCardNumber(DataHelper.getSecondCardNumber());
+        orderPage.inputCardNumber(DataHelper.CardNumber.getSecondCardNumber());
         orderPage.inputCardMonth(DataHelper.getThisMonth());
         orderPage.inputCardYear(DataHelper.getNextYear());
         orderPage.inputCustomerName(DataHelper.getCorrectCustomerName());
@@ -243,7 +243,7 @@ public class OrderTester {
         val sqlHelper = new SQLHelper();
         long rowCountFirst = sqlHelper.rowCount();
         orderPage.choiceCredit();
-        orderPage.inputCardNumber(DataHelper.getThirdCardNumber());
+        orderPage.inputCardNumber(DataHelper.CardNumber.getThirdCardNumber());
         orderPage.inputCardMonth(DataHelper.getThisMonth());
         orderPage.inputCardYear(DataHelper.getNextYear());
         orderPage.inputCustomerName(DataHelper.getCorrectCustomerName());
@@ -260,7 +260,7 @@ public class OrderTester {
         val sqlHelper = new SQLHelper();
         long rowCountFirst = sqlHelper.rowCount();
         orderPage.choiceCredit();
-        orderPage.inputCardNumber(DataHelper.getIncorrectCardNumber());
+        orderPage.inputCardNumber(DataHelper.CardNumber.getIncorrectCardNumber());
         orderPage.inputCardMonth(DataHelper.getIncorrectMonth());
         orderPage.inputCardYear(DataHelper.getIncorrectYear());
         orderPage.inputCustomerName(DataHelper.getIncorrectCustomerName());
@@ -281,7 +281,7 @@ public class OrderTester {
         val sqlHelper = new SQLHelper();
         long rowCountFirst = sqlHelper.rowCount();
         orderPage.choiceCredit();
-        orderPage.inputCardNumber(DataHelper.getSpecialsCardNumber());
+        orderPage.inputCardNumber(DataHelper.CardNumber.getSpecialsCardNumber());
         orderPage.inputCardMonth(DataHelper.getSpecialsCardMonth());
         orderPage.inputCardYear(DataHelper.getSpecialsCardYear());
         orderPage.inputCustomerName(DataHelper.getSpecialsCustomerName());
@@ -321,7 +321,7 @@ public class OrderTester {
         long rowCountFirst = sqlHelper.rowCount();
         orderPage.choiceCredit();
         orderPage.continueClick();
-        orderPage.inputCardNumber(DataHelper.getSecondCardNumber());
+        orderPage.inputCardNumber(DataHelper.CardNumber.getSecondCardNumber());
         orderPage.inputCardMonth(DataHelper.getFalseMonth());
         orderPage.inputCardYear(DataHelper.getNextYear());
         orderPage.inputCustomerName(DataHelper.getCorrectCustomerName());
@@ -339,7 +339,7 @@ public class OrderTester {
         long rowCountFirst = sqlHelper.rowCount();
         orderPage.choiceCredit();
         orderPage.continueClick();
-        orderPage.inputCardNumber(DataHelper.getSecondCardNumber());
+        orderPage.inputCardNumber(DataHelper.CardNumber.getSecondCardNumber());
         orderPage.inputCardMonth(DataHelper.getLastMonth());
         orderPage.inputCardYear(DataHelper.getThisYear());
         orderPage.inputCustomerName(DataHelper.getCorrectCustomerName());
@@ -357,7 +357,7 @@ public class OrderTester {
         long rowCountFirst = sqlHelper.rowCount();
         orderPage.choiceCredit();
         orderPage.continueClick();
-        orderPage.inputCardNumber(DataHelper.getSecondCardNumber());
+        orderPage.inputCardNumber(DataHelper.CardNumber.getSecondCardNumber());
         orderPage.inputCardMonth(DataHelper.getThisMonth());
         orderPage.inputCardYear(DataHelper.getLastYear());
         orderPage.inputCustomerName(DataHelper.getCorrectCustomerName());

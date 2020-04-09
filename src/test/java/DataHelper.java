@@ -5,32 +5,33 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class DataHelper {
-    private DataHelper() {
+    public DataHelper() {
     }
 
     @Value
     public static class CardNumber {
         private String cardNumber;
-    }
 
-    public static CardNumber getFirstCardNumber() {
-        return new CardNumber("4444 4444 4444 4441");
-    }
+        public static CardNumber getFirstCardNumber() {
+            return new CardNumber("4444 4444 4444 4441");
+        }
 
-    public static CardNumber getSecondCardNumber() {
-        return new CardNumber("4444 4444 4444 4442");
-    }
+        public static CardNumber getSecondCardNumber() {
+            return new CardNumber("4444 4444 4444 4442");
+        }
 
-    public static CardNumber getThirdCardNumber() {
-        return new CardNumber("4444 4444 4444 4443");
-    }
+        public static CardNumber getThirdCardNumber() {
+            return new CardNumber("4444 4444 4444 4443");
+        }
 
-    public static CardNumber getIncorrectCardNumber() {
-        return new CardNumber("NNNN NNNN NNNN NNNN");
-    }
+        public static CardNumber getIncorrectCardNumber() {
+            return new CardNumber("NNNN NNNN NNNN NNNN");
 
-    public static CardNumber getSpecialsCardNumber() {
-        return new CardNumber("@@");
+        }
+
+        public static CardNumber getSpecialsCardNumber() {
+            return new CardNumber("@@");
+        }
     }
 
     @Value
@@ -134,7 +135,8 @@ public class DataHelper {
         return new CardCVV("@@");
     }
 
-    public static String getApproved() { return "APPROVED";
+    public static String getApproved() {
+        return "APPROVED";
     }
 
     public static String getDeclined() {
