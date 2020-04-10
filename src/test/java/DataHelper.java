@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class DataHelper {
-    public DataHelper() {
+    private DataHelper() {
     }
 
     @Value
@@ -37,7 +37,7 @@ public class DataHelper {
     @Value
     public static class CardMonth {
         private String cardMonth;
-    }
+
 
     public static CardMonth getFalseMonth() {
         return new CardMonth("13");
@@ -63,10 +63,12 @@ public class DataHelper {
         return new CardMonth("@@");
     }
 
+    }
+
     @Value
     public static class CardYear {
         private String cardYear;
-    }
+
 
     public static CardYear getThisYear() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy");
@@ -94,10 +96,12 @@ public class DataHelper {
         return new CardYear("@@");
     }
 
+    }
+
     @Value
     public static class CustomerName {
         private String customerName;
-    }
+
 
     public static CustomerName getCorrectCustomerName() {
         Faker faker;
@@ -114,10 +118,12 @@ public class DataHelper {
         return new CustomerName("@@");
     }
 
+    }
+
     @Value
     public static class CardCVV {
         private String cardCVV;
-    }
+
 
     public static CardCVV getCorrectCVV() {
         Faker faker;
@@ -133,6 +139,8 @@ public class DataHelper {
 
     public static CardCVV getSpecialsCardCVV() {
         return new CardCVV("@@");
+    }
+
     }
 
     public static String getApproved() {
