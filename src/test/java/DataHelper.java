@@ -39,29 +39,29 @@ public class DataHelper {
         private String cardMonth;
 
 
-    public static CardMonth getFalseMonth() {
-        return new CardMonth("13");
-    }
+        public static CardMonth getFalseMonth() {
+            return new CardMonth("13");
+        }
 
-    public static CardMonth getIncorrectMonth() {
-        return new CardMonth("NN");
-    }
+        public static CardMonth getIncorrectMonth() {
+            return new CardMonth("NN");
+        }
 
-    public static CardMonth getLastMonth() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM");
-        String lastMonth = LocalDate.now().minusMonths(1).format(formatter);
-        return new CardMonth(lastMonth);
-    }
+        public static CardMonth getLastMonth() {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM");
+            String lastMonth = LocalDate.now().minusMonths(1).format(formatter);
+            return new CardMonth(lastMonth);
+        }
 
-    public static CardMonth getThisMonth() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM");
-        String thisMonth = LocalDate.now().format(formatter);
-        return new CardMonth(thisMonth);
-    }
+        public static CardMonth getThisMonth() {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM");
+            String thisMonth = LocalDate.now().format(formatter);
+            return new CardMonth(thisMonth);
+        }
 
-    public static CardMonth getSpecialsCardMonth() {
-        return new CardMonth("@@");
-    }
+        public static CardMonth getSpecialsCardMonth() {
+            return new CardMonth("@@");
+        }
 
     }
 
@@ -70,31 +70,31 @@ public class DataHelper {
         private String cardYear;
 
 
-    public static CardYear getThisYear() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy");
-        String thisYear = LocalDate.now().format(formatter);
-        return new CardYear(thisYear);
-    }
+        public static CardYear getThisYear() {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy");
+            String thisYear = LocalDate.now().format(formatter);
+            return new CardYear(thisYear);
+        }
 
-    public static CardYear getNextYear() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy");
-        String nextYear = LocalDate.now().plusYears(1).format(formatter);
-        return new CardYear(nextYear);
-    }
+        public static CardYear getNextYear() {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy");
+            String nextYear = LocalDate.now().plusYears(1).format(formatter);
+            return new CardYear(nextYear);
+        }
 
-    public static CardYear getLastYear() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy");
-        String lastYear = LocalDate.now().minusYears(1).format(formatter);
-        return new CardYear(lastYear);
-    }
+        public static CardYear getLastYear() {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy");
+            String lastYear = LocalDate.now().minusYears(1).format(formatter);
+            return new CardYear(lastYear);
+        }
 
-    public static CardYear getIncorrectYear() {
-        return new CardYear("NN");
-    }
+        public static CardYear getIncorrectYear() {
+            return new CardYear("NN");
+        }
 
-    public static CardYear getSpecialsCardYear() {
-        return new CardYear("@@");
-    }
+        public static CardYear getSpecialsCardYear() {
+            return new CardYear("@@");
+        }
 
     }
 
@@ -103,20 +103,20 @@ public class DataHelper {
         private String customerName;
 
 
-    public static CustomerName getCorrectCustomerName() {
-        Faker faker;
-        faker = new Faker();
-        String customerName = faker.name().fullName();
-        return new CustomerName(customerName);
-    }
+        public static CustomerName getCorrectCustomerName() {
+            Faker faker;
+            faker = new Faker();
+            String customerName = faker.name().fullName();
+            return new CustomerName(customerName);
+        }
 
-    public static CustomerName getIncorrectCustomerName() {
-        return new CustomerName("1 1");
-    }
+        public static CustomerName getIncorrectCustomerName() {
+            return new CustomerName("1 1");
+        }
 
-    public static CustomerName getSpecialsCustomerName() {
-        return new CustomerName("@@");
-    }
+        public static CustomerName getSpecialsCustomerName() {
+            return new CustomerName("@@");
+        }
 
     }
 
@@ -125,21 +125,21 @@ public class DataHelper {
         private String cardCVV;
 
 
-    public static CardCVV getCorrectCVV() {
-        Faker faker;
-        faker = new Faker();
-        int intCardCVV = faker.number().numberBetween(100, 999);
-        String cardCVV = Integer.toString(intCardCVV);
-        return new CardCVV(cardCVV);
-    }
+        public static CardCVV getCorrectCVV() {
+            Faker faker;
+            faker = new Faker();
+            int intCardCVV = faker.number().numberBetween(100, 999);
+            String cardCVV = Integer.toString(intCardCVV);
+            return new CardCVV(cardCVV);
+        }
 
-    public static CardCVV getIncorrectCVV() {
-        return new CardCVV("NNN");
-    }
+        public static CardCVV getIncorrectCVV() {
+            return new CardCVV("NNN");
+        }
 
-    public static CardCVV getSpecialsCardCVV() {
-        return new CardCVV("@@");
-    }
+        public static CardCVV getSpecialsCardCVV() {
+            return new CardCVV("@@");
+        }
 
     }
 
