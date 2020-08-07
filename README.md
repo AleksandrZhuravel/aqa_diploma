@@ -21,7 +21,7 @@
 
 ##### 1. Общие действия для запуска приложения:
 
-1) Запусть Docker Toolbox(или Docker Desktop);
+1) Запустить Docker Toolbox(или Docker Desktop);
 2) Запустить IntelliJ IDEA;
 3) Открыть терминал IntelliJ IDEA(в дальнейшем - Терминал);
 4) Ввести в Терминал команду "docker image build -t node-app:1.0 .";
